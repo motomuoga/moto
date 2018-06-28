@@ -34,13 +34,13 @@ extern uint8_t is_master;
 // entirely and just use numbers.
 enum custom_layers {
   _BASE = 0,
-  _TENKEY,
-  _MOUSE,
-  _LOWER,
-  _RAISE,
   _KANA,
+  _TENKEY,
   _KANAL,
   _KANAR,
+  _LOWER,
+  _RAISE,
+  _MOUSE,
   _ADJUST
 };
 
@@ -338,6 +338,8 @@ enum macro_keycodes {
 #define MAC AG_NORM
 #define WIN AG_SWAP
 
+#define MAGICD LSFT(RSFT(KC_D))
+
 #define IS_MAC (keymap_config.swap_lalt_lgui==false)
 #define REAL_SHIFT_MODE  ( get_mods() & (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT)))
 #define REAL_LSFT_MODE  ( get_mods() & MOD_BIT(KC_LSFT) )
@@ -480,10 +482,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_KANA] = KEYMAP( \
       _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
-      _______, KN_RA,   KN_RU,   KN_KO,   KN_HA,   KN_XYO,                    KN_KI,   KN_NO,   KN_KU,   KN_A,    KN_RE,   JP_MINS, \
-      _______, KN_TA,   KN_TO,   KN_KA,   KN_TE,   KN_MO,                     KN_WO,   KN_I,    KN_U,    KN_SI,   KN_NN,   _______, \
-      _______, KN_MA,   KN_RI,   KN_NI,   KN_SA,   KN_NA,   _______, _______, KN_SU,   KN_TU,   JP_COMM, JP_DOT,  KN_XTU,  _______, \
-      LM_ESC,  _______, _______, _______, LRM_EIS, _______, LLK_SPC, LRK_SPC, _______, LLM_KAN, _______, _______, _______, _______  \
+      KC_TAB,  KN_RA,   KN_RU,   KN_KO,   KN_HA,   KN_XYO,                    KN_KI,   KN_NO,   KN_KU,   KN_A,    KN_RE,   JP_MINS, \
+      JP_LBRC, KN_TA,   KN_TO,   KN_KA,   KN_TE,   KN_MO,                     KN_WO,   KN_I,    KN_U,    KN_SI,   KN_NN,   JP_RBRC, \
+      KC_LSFT, KN_MA,   KN_RI,   KN_NI,   KN_SA,   KN_NA,   _______, _______, KN_SU,   KN_TU,   JP_COMM, JP_DOT,  KN_XTU,  KC_RSFT, \
+      LM_ESC, LF_CAPS,  KC_LALT, KC_LGUI, MO_LOWER,KC_BSPC, LLK_SPC,LRK_SPC,  KC_ENT,  MO_RAISE,KC_SLSH, JP_QUES, JP_EXLM, XXXXXXX  \
       ),
 
   /* かな入力　左シフト
@@ -534,7 +536,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |             |  F7  |  F8  |  F9  | F10  | F11  | F12  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |      |      |      |      |      |             |      |      |      |      |      |      |
+   * | Reset|      |      |      |      |      |             |      |      |      |      |      |      |
    * |------+------+------+------+------+------|-------------|------+------+------+------+------+------|
    * |  Win |  Mac |      | Raise| Lower| Mouse|      |      |      |      |Qwerty| KANA |TenKey|      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
@@ -544,7 +546,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ADJUST] =  KEYMAP( \
       _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
       KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
-      RESET,   _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
+      RESET,   MAGICD,  _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
       WIN,     MAC,     _______, RAISE,   LOWER,   MOUSE,   _______, _______, _______, _______, QWERTY,  KANA,    TENKEY,  _______, \
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
       )
@@ -567,7 +569,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
  [_BASE] = KEYMAP( \
      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     JX_AT,    \
-     KC_RSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    JX_SCLN,  HC_COLN, \
+     KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    JX_SCLN,  HC_COLN, \
      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  HS_BSLS, \
      LM_ESC , LF_CAPS, KC_LALT, KC_LGUI, LL_EIS,  KC_BSPC, LR_SPC, LL_SPC,   KC_ENT,  LR_KAN,  JX_CIRC, JX_YEN,  LM_LBRC,  LF_RBRC  \
      ),
@@ -658,7 +660,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_KANA] = KEYMAP( \
       KC_TAB,  KN_RA,   KN_RU,   KN_KO,   KN_HA,   KN_XYO,                    KN_KI,   KN_NO,   KN_KU,   KN_A,    KN_RE,   JP_MINS, \
       JP_LBRC, KN_TA,   KN_TO,   KN_KA,   KN_TE,   KN_MO,                     KN_WO,   KN_I,    KN_U,    KN_SI,   KN_NN,   JP_RBRC, \
-      KC_LSFT, KN_MA,   KN_RI,   KN_NI,   KN_SA,   KN_NA,                     KN_SU,   KN_TU,   JP_COMM, JP_DOT,  KN_XTU,  XXXXXXX, \
+      KC_LSFT, KN_MA,   KN_RI,   KN_NI,   KN_SA,   KN_NA,                     KN_SU,   KN_TU,   JP_COMM, JP_DOT,  KN_XTU,  KC_RSFT, \
       LM_ESC, LF_CAPS,  KC_LALT, KC_LGUI, MO_LOWER,KC_BSPC, LLK_SPC,LRK_SPC,  KC_ENT,  MO_RAISE,KC_SLSH, JP_QUES, JP_EXLM, XXXXXXX  \
       ),
 
@@ -703,16 +705,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------.             ,-----------------------------------------.
    * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |             |  F7  |  F8  |  F9  | F10  | F11  | F12  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |  Win |  Mac |      |      |      |      |             |      |      |      |      |      |      |
+   * | Reset|      |      |      |      |      |             |      |      |      |      |      |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |Qwerty|TenKey|      |      |      |      |             |      |      |      |      |      |      |
+   * |  Win |  Mac |      | Raise| Lower| Mouse|             |      |      |Querty| Kana |Tenkey|      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
    * |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_ADJUST] =  KEYMAP( \
       KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
-      RESET,   _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
+      RESET,   MAGICD,  _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
       WIN,     MAC,     _______, RAISE,   LOWER,   MOUSE,                     _______, _______, QWERTY,  KANA,    TENKEY,  _______, \
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
       )
@@ -769,6 +771,8 @@ void debug_keys(void){
 void debug_keys(void){  ; }
 #endif
 
+// かな入力を無理やり実現
+// SSK用にシフト処理も入れてある
 bool send_roma(keyrecord_t *record, char key[]){
   char send[5];
 
@@ -795,20 +799,16 @@ static uint16_t cs_pre_send = KC_NO;
 static bool cs_real_shift = false;
 static uint16_t custom_timer;
 
+// カスタマイズしたシフトキーの動作を保持するために使用
 bool custom_shift_shift(uint16_t keycode, keyrecord_t *record){
-  dprint("custom_shift_shift");
-
 
   // 実シフト状態を保持
   cs_real_shift = record->event.pressed;
 
   // 前回値が設定されていない時には何もしない
   if( KC_NO == cs_pre_key ){
-    dprint("\n");
     return true;
   }
-
-  dprintf("%s ",cs_real_shift?"PRESS":"RELEASE");
 
   // カスタムシフト処理が必要で
   if( record->event.pressed ){
@@ -817,9 +817,6 @@ bool custom_shift_shift(uint16_t keycode, keyrecord_t *record){
       // カスタムシフトキーが要シフトでなければ
       // シフトキーを削除する
       del_mods(MOD_BIT(KC_LSFT));
-
-      dprint("del_mods");
-
     }
     // カスタム通常キーを削除する
     unregister_code(cs_pre_key);
@@ -833,8 +830,6 @@ bool custom_shift_shift(uint16_t keycode, keyrecord_t *record){
       // カスタム通常キーが要シフトなら
       // シフトキーを登録する
       add_mods(MOD_BIT(KC_LSFT));
-
-      dprint("add_mods");
     }
     // カスタムシフトキーを削除する
     unregister_code(cs_pre_shift);
@@ -843,10 +838,6 @@ bool custom_shift_shift(uint16_t keycode, keyrecord_t *record){
     // 送信キーを保持
     cs_pre_send = cs_pre_key;
   }
-
-  dprint("\n");
-
-  debug_keys();
   return false;
 }
 
@@ -855,32 +846,20 @@ bool custom_shift_shift(uint16_t keycode, keyrecord_t *record){
 // 基本的にシフトされている状態のKC_マクロを、シフトされていない状態で入力する
 bool custom_shift_key(uint16_t keycode, keyrecord_t *record, uint16_t normal_key, uint16_t shift_key){
 
-dprint("custom_shift_key ");
-
+  dprint("custom_shift_key ");
   uint16_t  send_key;
-
-  // 前回値が設定されていない時には何もしない
-//  if( KC_NO == cs_pre_key ) return true;
-
 
   // カスタムシフト処理が必要で
   if( record->event.pressed ){
-    dprint("PRESS ");
-
     // シフトが押されていた場合
     if( REAL_SHIFT_MODE ){
       // カスタムシフトキーを送る
       send_key = shift_key;
-
-      dprint("SHIFT ");
     }else{
         // カスタム通常キーを送る
       send_key = normal_key;
-
-      dprint("NORMAL ");
     }
     cs_pre_send = send_key;
-
     // 対象キーが押された時に、
     if( !IS_LSFT(send_key) ){
       // 送信キーが要シフトでなく
@@ -888,8 +867,6 @@ dprint("custom_shift_key ");
         // シフトキーが押されている時には
         // シフトキーを削除する
         del_mods(MOD_BIT(KC_LSFT));
-
-        dprint("del_mods ");
       }
     }else{
       // 送信キーが要シフトで
@@ -897,8 +874,6 @@ dprint("custom_shift_key ");
         // シフトキーが押されていない時には
         // シフトキーを登録する
         add_mods(MOD_BIT(KC_LSFT));
-
-        dprint("add_mods ");
       }
     }
     unregister_code(keycode);
@@ -906,16 +881,12 @@ dprint("custom_shift_key ");
     register_code(send_key);
     cs_pre_key = normal_key;
     cs_pre_shift = shift_key;
-    dprintf(" %02X ",cs_pre_send);
-
   }else{
     dprintf("RELEASE %s",cs_real_shift?"ON":"OFF");
     // 送信キーを削除する
     unregister_code(cs_pre_send);
-    dprintf(" %02X ",cs_pre_send);
     // カスタム通常キーを削除する
     cs_pre_key = KC_NO;
-
     // 実シフト状態に戻す
     if( cs_real_shift ){
       // 実シフトがオンで
@@ -923,8 +894,6 @@ dprint("custom_shift_key ");
         // 現状のシフトがオフの場合
         // シフトキーを登録する
         add_mods(MOD_BIT(KC_LSFT));
-
-        dprint("add_mods ");
       }
     }else{
       // 実シフトがオフで
@@ -932,63 +901,49 @@ dprint("custom_shift_key ");
         // 現状のシフトがオンの場合
         // シフトを削除する
         del_mods(MOD_BIT(KC_LSFT));
-
-        dprint("del_mods ");
       }
     }
   }
-  dprint("\n");
-  debug_keys();
   return false;
 }
 
 
 // 長押し時にシフトさせタップ時にキー入力させる
 // 通常はMTで対応できるが、タップ対象のキーがcustom_keycodesに登録されているキーの場合動作しないので
-// MT指定したコードから呼び出す
+// MT指定したいコードから呼び出す
 bool custom_MT(uint16_t keycode, keyrecord_t *record, uint16_t modifier, uint16_t modifier2, uint16_t normal_key, uint16_t shift_key){
 
   if (record->event.pressed) {
-    dprint("custom_MT\n");
     custom_timer = timer_read();
     register_code(modifier);
     if( modifier2 != KC_NO ){
       register_code(modifier2);
     }
-     debug_keys();
   }else{
-    dprint("custom_MT ");
     unregister_code(modifier);
     if( modifier2 != KC_NO ){
       unregister_code(modifier2);
     }
     if( timer_elapsed(custom_timer) < TAPPING_TERM ){
-      dprint("TAP\n");
       record->event.pressed = true;
       custom_shift_key(keycode, record, normal_key, shift_key);
       record->event.pressed = false;
       custom_shift_key(keycode, record, normal_key, shift_key);
-    }else{
-      // モードキーの登録
-      dprint("HOLD");
-
     }
     custom_timer = 0;
-    dprint("\n");
   }
   return true;
 }
 
+// LTと同様の処理　Tapに割り当たっているキーが通常のKCでは対応できない場合に使用
+// 通常はLTで対応できるが、タップ対象のキーがcustom_keycodesに登録されているキーの場合動作しないので
+// LT指定したいコードから呼び出す
 bool custom_LT(uint16_t keycode, keyrecord_t *record, uint16_t layer, uint16_t normal_key, uint16_t shift_key){
-
-dprint("custom_LT ");
 
   if (record->event.pressed) {
     custom_timer = timer_read();
     layer_on(layer);
-    dprintf("ON %d",layer);
   }else{
-    dprintf("OFF %d",layer);
     layer_off(layer);
     if( timer_elapsed(custom_timer) < TAPPING_TERM ){
       record->event.pressed = true;
@@ -1000,6 +955,7 @@ dprint("custom_LT ");
   return true;
 }
 
+// MacとWinで送信するコードが異なるキーの処理
 bool custom_key(uint16_t keycode, keyrecord_t *record, uint16_t mac_key, uint16_t win_key){
   uint16_t key;
   key = ( IS_MAC ) ? mac_key : win_key;
@@ -1042,6 +998,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         #endif
         DBG_INFO( "BASE" );
         persistent_default_layer_set(1UL<<_BASE);
+      }
+      return false;
+      break;
+    case KANA:
+      if (record->event.pressed) {
+        //DBG_INFO( "KANA" );
+        persistent_default_layer_set(1UL<<_KANA);
       }
       return false;
       break;
@@ -1412,7 +1375,9 @@ static void render_logo(struct CharacterMatrix *matrix) {
 
 #if 1
   snprintf(led_dbg_buff[0], sizeof(led_dbg_buff[0]), "info:%s",led_dbg_info);
-  snprintf(led_dbg_buff[1], sizeof(led_dbg_buff[1]), "dl:%d[%ld] cl:%d[%ld]",biton32(default_layer_state),default_layer_state,biton32(layer_state),layer_state);
+  snprintf(led_dbg_buff[1], sizeof(led_dbg_buff[1]), "dl:%d[%ld] cl:%d[%ld]",
+      biton32(default_layer_state),default_layer_state,
+      biton32(layer_state),layer_state);
 
   matrix_write(matrix, led_dbg_buff[0]);
   matrix_write_P(matrix, PSTR("\n"));
